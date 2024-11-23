@@ -130,7 +130,7 @@
     position: relative;
     height: 500px;
     background-color: #f8f8f8;
-    background-image: url("./public/assets/images/hero.jpg");
+    background-image: url("../images/hero.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
