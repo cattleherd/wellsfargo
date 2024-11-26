@@ -3,428 +3,1303 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>U.S. Small Business Administration</title>
-    <link rel="stylesheet" href="./public/assets/styles/styles.css">
-</head>
+    <title>Wells Fargo - Account Summary</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 70%
+          ),
+          url("./public/assets/images/background.jpg") no-repeat center top;
+        background-size: cover;
+        min-height: 100vh;
+      }
+
+      .mobile-menu {
+        display: none;
+      }
+
+      .header {
+        background-color: #d71e28;
+        padding: 15px 0;
+        color: white;
+        position: relative;
+        z-index: 2;
+      }
+      .header-content {
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 3vw; 
+        padding-right: 3vw;
+      }
+
+      .logo {
+        color: #ffb81c;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      .right-dashboard {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .search-bar {
+        background: #ececec;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .search-field {
+        width: var(--container-width);
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 10.5vw;
+      }
+
+      .search-icon {
+        width: 16px;
+        height: 16px;
+        object-fit: contain;
+      }
+
+      .main-container {
+        max-width: 80vw;
+        margin: 0 auto;
+        background: white;
+        min-height: calc(100vh - 120px);
+        display: flex;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 20px;
+        background: white;
+      }
+
+      .page-title {
+        color: #666;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        font-weight: normal;
+      }
+
+      .account-details {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        background: white;
+        display: block;
+      }
+
+      .account-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .account-icon {
+        width: 30px;
+        height: 30px;
+        background-color: #eee;
+        border-radius: 4px;
+      }
+
+      .account-name {
+        color: #d71e28;
+        font-weight: bold;
+      }
+
+      .account-number {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .balance {
+        text-align: right;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .balance-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .balance-amount {
+        font-size: 1.1rem;
+        color: #333;
+        font-weight: bolder;
+      }
+
+      .balance-label {
+        font-size: 0.8rem;
+        color: #666;
+        font-weight: 400;
+      }
+
+      .card-links {
+        padding: 10px 0;
+        display: flex;
+        gap: 20px;
+        border-top: 1px solid #eee;
+        margin-top: 10px;
+      }
+
+      .card-link {
+        color: #0070c0;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .options {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+        padding: 20px 0;
+        border-top: 1px solid #ddd;
+      }
+
+      .promo-box {
+        flex: 1;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 4px;
+      }
+
+      .promo-box h3 {
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .promo-box p {
+        color: #888;
+        font-size: 0.9rem;
+      }
+
+      .right-panel {
+        width: 20vw;
+        background-color: #4a4a4a;
+        color: white;
+        padding: 20px;
+      }
+
+      .panel-section {
+        margin-bottom: 30px;
+      }
+
+      .panel-header {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        color: #fff;
+      }
+
+      .panel-item {
+        padding: 12px 0;
+        border-top: 1px solid #5a5a5a;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .message-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .mail-icon {
+        width: 16px;
+        height: 16px;
+        object-fit: contain;
+      }
+
+      .panel-item:last-child {
+        border-bottom: 1px solid #5a5a5a;
+      }
+
+      .video-section {
+        text-align: center;
+        padding: 30px 0;
+        border-bottom: 2px solid #ffb81c;
+        margin-bottom: 20px;
+      }
+
+      .play-button {
+        width: 60px;
+        height: 60px;
+        border: 2px solid #ffb81c;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px auto;
+        color: #ffb81c;
+        font-size: 24px;
+      }
+
+      .video-title {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        color: #fff;
+      }
+
+      .video-description {
+        color: #ccc;
+        font-size: 0.9rem;
+      }
+
+      .dot-navigation {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        margin: 15px 0;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #666;
+      }
+
+      .dot.active {
+        background-color: #fff;
+      }
+
+      .section-icon {
+        color: #ffb81c;
+        margin-right: 10px;
+      }
+
+      .arrow-icon {
+        color: #888;
+      }
+
+      .disclosures {
+        margin-top: 20px;
+        padding: 20px;
+        color: #666;
+        font-size: 0.9rem;
+        border-top: 1px solid #ddd;
+      }
+
+      .footer {
+        background-color: #333;
+        color: white;
+        padding: 15px 0;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+      }
+
+      .menu-dots {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.2s;
+        margin-left: 10px;
+        position: relative;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 1000;
+        min-width: 200px;
+        margin-top: 5px; 
+      }
+
+      .dropdown-menu.active {
+        display: block;
+      }
+
+      .dropdown-menu button {
+        display: block;
+        width: 100%;
+        padding: 10px 15px;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+        color: #333;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-menu button:hover {
+        background-color: #f5f5f5;
+      }
+
+      .dots {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 5px;
+      }
+
+      .dot {
+        width: 4px;
+        height: 4px;
+        background-color: #666;
+        border-radius: 50%;
+      }
+      .account-info-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+      .mobile-footer {
+        display: none;
+      }
+
+      @media screen and (max-width: 536px) {
+        .logo {
+          font-size: 1rem;
+          position: absolute;
+          left: 50%;
+          top: 10%;
+          transform: translateX(-50%);
+        }
+
+        .header-content {
+          position: relative;
+        }
+
+        .page-title {
+          font-size: 1.2rem;
+          color: #666;
+          margin: 10px 0;
+          text-align: center;
+        }
+        .account-info-wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+        }
+
+        .account-details.menu-active .balance-text {
+          align-items: center;
+        }
+
+        .mobile-menu {
+          margin-top: 15px;
+          display: flex;
+          margin-bottom: 15px;
+          width: 100%;
+        }
+        .mobile-menu {
+          position: relative;
+          padding-left: 40px;
+        }
+
+        .mobile-menu-dots {
+          position: absolute;
+          left: -12px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .mobile-dot {
+          width: 6px;
+          height: 6px;
+          background-color: rgb(168, 168, 168);
+          border-radius: 50%;
+        }
+
+        body {
+          background: none;
+          background-color: #fff;
+        }
+        .card-links {
+          display: none;
+        }
+
+        .right-panel {
+          display: none;
+        }
+
+        .header {
+          height: 50px;
+        }
+
+        .logo {
+          font-size: 1rem;
+          position: absolute;
+          left: 50%;
+          top: 10%;
+          transform: translateX(-50%);
+        }
+
+        .right-dashboard {
+          display: none; 
+        }
+
+        .logo {
+          font-size: 1rem;
+          margin-right: auto;
+        }
+
+        .search-bar {
+          display: none; 
+        }
+
+        .main-container {
+          width: 100%;
+          max-width: 100%;
+          box-shadow: none;
+          flex-direction: column; 
+        }
+
+        .main-content {
+          padding: 10px;
+        }
+
+        .page-title {
+          font-size: 1.2rem;
+          color: #666;
+          margin: 10px 0;
+        }
+
+        .account-details {
+          border: none;
+          border-bottom: 1px solid #eee;
+          padding: 15px 10px;
+          border-radius: 0;
+        }
+
+        .account-icon {
+          display: none;
+        }
+
+        .account-name {
+          font-size: 1rem;
+          margin-bottom: 2px;
+        }
+
+        .account-number {
+          font-size: 0.8rem;
+        }
+
+        .balance-amount {
+          font-size: 1rem;
+        }
+
+        .balance-label {
+          font-size: 0.7rem;
+        }
+
+        .options {
+          display: none;
+        }
+
+        .mobile-footer {
+          display: block; 
+          background: #537f24;
+          color: white;
+          padding: 20px;
+          text-align: center;
+          margin-top: 20px;
+        }
+
+        .mobile-footer h2 {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+        }
+
+        .mobile-footer p {
+          font-size: 0.9rem;
+          margin-bottom: 20px;
+        }
+
+        .mobile-footer .rate-icon {
+          font-size: 2rem;
+          margin-bottom: 15px;
+        }
+
+        .get-started-btn {
+          background: #45681e;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          font-size: 0.9rem;
+          margin-top: 10px;
+        }
+
+        .slider-dots {
+          display: flex;
+          justify-content: center;
+          gap: 5px;
+          margin-top: 15px;
+        }
+
+        .slider-dot {
+          width: 8px;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+        }
+
+        .slider-dot.active {
+          background: white;
+        }
+
+        .disclosures {
+          font-size: 0.8rem;
+          padding: 15px;
+          margin-top: 0;
+        }
+
+        .nav-arrow {
+          color: white;
+          font-size: 1.5rem;
+        }
+        .dropdown-menu {
+          display: none !important; 
+        }
+
+        .mobile-menu {
+          position: relative;
+          display: none; 
+          flex-direction: row;
+          justify-content: space-around; 
+          background-color: #0067b1;
+          padding: 15px;
+          margin-top: 15px;
+          width: 100%;
+        }
+
+        .mobile-menu.active {
+          display: flex;
+        }
+
+        .mobile-menu button {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          background: none;
+          border: none;
+          border-right: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 8px 4px;
+          font-size: 0.75rem;
+          text-align: center;
+          gap: 8px;
+          width: 25%;
+        }
+
+        .mobile-menu button:last-child {
+          border-right: none;
+        }
+
+        .mobile-menu button svg {
+          width: 20px;
+          height: 20px;
+          stroke: white;
+        }
+
+        .mobile-menu button br {
+          display: none;
+        }
+
+        .mobile-menu button span {
+          white-space: nowrap;
+          font-size: 11px;
+        }
+      }
+
+      @media screen and (min-width: 537px) and (max-width: 1200px) {
+        .header-content {
+          width: 100vw;
+        }
+
+        .logo {
+          font-size: 1rem;
+        }
+        .mobile-footer {
+          display: none;
+        }
+
+        .main-container {
+          gap: 0.5rem;
+          max-width: 90vw;
+          padding-bottom: 1px;
+        }
+
+        .search-bar {
+          background: #f0f0f0;
+          padding: 3px 0;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .search-field {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding-right: 5.5vw;
+          text-align: right;
+          font-size: smaller;
+        }
+
+        .right-panel {
+          width: 25vw;
+        }
+
+        .account-details {
+          padding: 0.75rem;
+        }
+
+        .page-title {
+          font-size: 1.3rem;
+          color: #666;
+          margin-bottom: 1rem;
+        }
+
+        .account-name {
+          font-size: 0.9rem;
+        }
+
+        .account-number {
+          font-size: 0.75rem;
+        }
+
+        .balance-amount {
+          font-size: 0.9rem;
+        }
+
+        .balance-label {
+          font-size: 0.7rem;
+        }
+
+        .options {
+          gap: 0.5rem;
+        }
+
+        .promo-box {
+          padding: 0.75rem;
+        }
+
+        .promo-box h3 {
+          font-size: 0.9rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .promo-box p {
+          font-size: 0.75rem;
+        }
+
+        .video-title {
+          font-size: 1rem;
+        }
+
+        .video-description {
+          font-size: 0.75rem;
+        }
+
+        .panel-header {
+          font-size: 1rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .panel-item {
+          padding: 0.5rem 0;
+          font-size: 0.8rem;
+        }
+
+        .card-links {
+          padding: 0.5rem 0;
+          gap: 1rem;
+        }
+
+        .card-link {
+          font-size: 0.75rem;
+        }
+
+        .account-icon {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    </style>
+  </head>
   <body>
-    <div class="banner">
-      <div class="banner-inner">
-        <img
-          class="banner-flag"
-          src="./public/assets/images/flag.png"
-          alt="U.S. Flag"
-        />
-        <span>An official website of the United States government</span>
-        <a href="#" style="margin-left: 10px">Here's how you know</a>
-      </div>
-    </div>
-
-    <div class="hurricane-helene">
-      <div class="hurricane-helene-container">
-        <div class="hurricane-helene-content">
-          <h2>Hurricanes Helene and Milton</h2>
-          <p>Need help? <a href="#">Learn about SBA disaster assistance.</a></p>
-        </div>
-      </div>
-    </div>
-
-    <header>
-      <div class="header-container">
-        <div class="logo">
-          <img
-            src="./public/assets/images/logo.png"
-            alt="sba logo"
-            class="sba-logo"
-          />
-        </div>
-        <div class="right-header">
-          <a href="#" class="language-toggle">Español</a>
-          <div class="header-links">
-            <a href="#">For Partners</a>
-            <a href="#">Newsroom</a>
-            <a href="#">Contact us</a>
-            <a href="#">Other languages</a>
-          </div>
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">WELLS FARGO</div>
+        <div class="right-dashboard">
+          <span>Transfer and Pay</span>
+          <span>More</span>
+          <span>Sign Off</span>
         </div>
       </div>
     </header>
 
-    <nav>
-      <div class="nav-container">
-        <ul class="nav-list">
-          <li><a href="#">Business Guide</a></li>
-          <li><a href="#">Funding Programs</a></li>
-          <li><a href="#">Federal Contracting</a></li>
-          <li><a href="#">Learning Platform</a></li>
-          <li><a href="#">Local Assistance</a></li>
-          <li><a href="#">About SBA</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="hero">
-      <div class="hero-content">
-        <h1>Need funding for your small business?</h1>
-        <a href="#" class="hero-button">Learn More</a>
+    <div class="search-bar">
+      <div class="search-field">
+        <img
+          src="./public/assets/images/search.jpg"
+          alt="Search"
+          class="search-icon"
+        />
+        <span>Search</span>
       </div>
     </div>
 
-    <section class="links">
-      <div class="link-card">
-        <h2>Make a payment to SBA</h2>
-        <p>
-          Learn how to make a payment on your SBA loan or check your account
-          balance and due date.
-        </p>
-        <a href="#" class="link-button">Make a payment</a>
-      </div>
+    <div class="main-container">
+      <main class="main-content">
+        <h1 class="page-title">Account Summary</h1>
+        <div class="account-section">
+          <div class="account-details">
+            <div class="mobile-menu" id="menu1-mobile">
+              <div class="mobile-menu-dots">
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+              </div>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2v20m5-17H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+                  />
+                </svg>
+                <span>Transfer Money</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 12V7H5a2 2 0 01-2-2 2 2 0 012-2h14v5M3 17a2 2 0 012-2h14v5H5a2 2 0 01-2-2z"
+                  />
+                </svg>
+                <span>Pay Bills</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+                  />
+                </svg>
+                <span>View Statements</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                </svg>
+                <span>View Activity</span>
+              </button>
+            </div>
+            <div class="account-info-wrapper">
+              <div class="account-info">
+                <img
+                  src="./public/assets/images/chequing.jpg"
+                  alt="Checking"
+                  class="account-icon"
+                />
+                <div>
+                  <div class="account-name">EVERYDAY CHECKING</div>
+                  <div class="account-number">...7406</div>
+                </div>
+              </div>
+              <div class="balance">
+                <div class="balance-text">
+                  <div class="balance-amount">$2,647.34</div>
+                  <div class="balance-label">Available balance</div>
+                </div>
+                <div class="menu-dots" onclick="toggleDropdown(event, 'menu1')">
+                  <div class="dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+                  <div class="dropdown-menu" id="menu1">
+                    <button>View Activity</button>
+                    <button>Transfer Money</button>
+                    <button>Pay Bills</button>
+                    <button>View Statements</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="account-details">
+            <div class="mobile-menu" id="menu2-mobile">
+              <div class="mobile-menu-dots">
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+              </div>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2v20m5-17H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+                  />
+                </svg>
+                <span>Transfer Money</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 12V7H5a2 2 0 01-2-2 2 2 0 012-2h14v5M3 17a2 2 0 012-2h14v5H5a2 2 0 01-2-2z"
+                  />
+                </svg>
+                <span>Pay Bills</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+                  />
+                </svg>
+                <span>View Statements</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                </svg>
+                <span>View Activity</span>
+              </button>
+            </div>
+            <div class="account-info-wrapper">
+              <div class="account-info">
+                <img
+                  src="./public/assets/images/savings.jpg"
+                  alt="Savings"
+                  class="account-icon"
+                />
+                <div>
+                  <div class="account-name">WAY2SAVE® SAVINGS</div>
+                  <div class="account-number">...3182</div>
+                </div>
+              </div>
+              <div class="balance">
+                <div class="balance-text">
+                  <div class="balance-amount">$15,429.58</div>
+                  <div class="balance-label">Available balance</div>
+                </div>
+                <div class="menu-dots" onclick="toggleDropdown(event, 'menu2')">
+                  <div class="dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+                  <div class="dropdown-menu" id="menu2">
+                    <button>View Activity</button>
+                    <button>Transfer Money</button>
+                    <button>Pay Bills</button>
+                    <button>View Statements</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div class="link-card">
-        <h2>Sign into your SBA account</h2>
-        <p>
-          Check your account status, update your information, and get access to
-          other portals.
-        </p>
-        <a href="#" class="link-button">Access accounts</a>
-      </div>
+          <div class="account-details">
+            <div class="mobile-menu" id="menu3-mobile">
+              <div class="mobile-menu-dots">
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+              </div>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 12V7H5a2 2 0 01-2-2 2 2 0 012-2h14v5M3 17a2 2 0 012-2h14v5H5a2 2 0 01-2-2z"
+                  />
+                </svg>
+                <span>Pay Bills</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+                  />
+                </svg>
+                <span>View Statements</span>
+              </button>
+            </div>
+            <div class="account-info-wrapper">
+              <div class="account-info">
+                <img
+                  src="./public/assets/images/chequing.jpg"
+                  alt="Credit Card"
+                  class="account-icon"
+                />
+                <div>
+                  <div class="account-name">ACTIVE CASH VISA SIGNATURE®</div>
+                  <div class="account-number">...4321</div>
+                </div>
+              </div>
+              <div class="balance">
+                <div class="balance-text">
+                  <div class="balance-amount">$1,234.56</div>
+                  <div class="balance-label">Current balance</div>
+                </div>
+                <div class="menu-dots" onclick="toggleDropdown(event, 'menu3')">
+                  <div class="dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+                  <div class="dropdown-menu" id="menu3">
+                    <button>View Statements</button>
+                    <button>Pay Bills</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div class="link-card">
-        <h2>Upcoming events</h2>
-        <p>
-          SBA and our partners host virtual and in-person educational trainings
-          to help start and grow your business.
-        </p>
-        <a href="#" class="link-button">Find upcoming events</a>
-      </div>
-    </section>
-
-    <section class="small-business-saturday">
-      <div class="saturday-content">
-        <h2>Small Business Saturday is November 30, 2024</h2>
-        <p>
-          Please join SBA and organizations across the country in supporting
-          your local small businesses by shopping at a small business.
-        </p>
-        <a href="#" class="participate-button">Learn how you can participate</a>
-      </div>
-    </section>
-    <section class="business-topics">
-      <h2>Browse business topics</h2>
-      <div class="topics-grid">
-        <div class="topic-card">
-          <img
-            src="./public/assets/images/plan-1.png"
-            alt="Business counseling"
-            class="plan-image"
-          />
-          <a href="#" class="topic-title">Plan your business</a>
-          <p class="topic-description">
-            You've got a great idea. Now, make a plan to turn it into a great
-            business.
-          </p>
-          <ul class="topic-links">
-            <li><a href="#">Market research and competitive analysis</a></li>
-            <li><a href="#">Write your business plan</a></li>
-            <li><a href="#">Calculate your startup costs</a></li>
-            <li><a href="#">Establish business credit</a></li>
-            <li><a href="#">Fund your business</a></li>
-            <li><a href="#">Buy an existing business or franchise</a></li>
-          </ul>
+          <div class="account-details">
+            <div class="mobile-menu" id="menu4-mobile">
+              <div class="mobile-menu-dots">
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+                <div class="mobile-dot"></div>
+              </div>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 12V7H5a2 2 0 01-2-2 2 2 0 012-2h14v5M3 17a2 2 0 012-2h14v5H5a2 2 0 01-2-2z"
+                  />
+                </svg>
+                <span>Pay Bills</span>
+              </button>
+              <button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+                  />
+                </svg>
+                <span>View Statements</span>
+              </button>
+            </div>
+            <div class="account-info-wrapper">
+              <div class="account-info">
+                <img
+                  src="./public/assets/images/chequing.jpg"
+                  alt="Credit Card"
+                  class="account-icon"
+                />
+                <div>
+                  <div class="account-name">REFLECT VISA SIGNATURE®</div>
+                  <div class="account-number">...8765</div>
+                </div>
+              </div>
+              <div class="balance">
+                <div class="balance-text">
+                  <div class="balance-amount">$2,468.42</div>
+                  <div class="balance-label">Current balance</div>
+                </div>
+                <div class="menu-dots" onclick="toggleDropdown(event, 'menu4')">
+                  <div class="dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+                  <div class="dropdown-menu" id="menu4">
+                    <button>View Statements</button>
+                    <button>Pay Bills</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="topic-card">
-          <img
-            src="./public/assets/images/plan-2.png"
-            alt="Business counseling"
-            class="plan-image"
-          />
-          <a href="#" class="topic-title">Launch your business</a>
-          <p class="topic-description">
-            Turn your business into a reality. Register, file, and start doing
-            business.
-          </p>
-          <ul class="topic-links">
-            <li><a href="#">Pick your business location</a></li>
-            <li><a href="#">Choose a business structure</a></li>
-            <li><a href="#">Choose your business name</a></li>
-            <li><a href="#">Register your business</a></li>
-            <li><a href="#">Get federal and state tax ID numbers</a></li>
-            <li><a href="#">Apply for licenses and permits</a></li>
-            <li><a href="#">Open a business bank account</a></li>
-            <li><a href="#">Get business insurance</a></li>
-          </ul>
+        <div class="mobile-footer">
+          <div class="rate-icon">%</div>
+          <h2>Check today's rates</h2>
+          <p>Lock in while mortgage rates are still low</p>
+          <button class="get-started-btn">Get Started</button>
+          <div class="slider-dots">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+          </div>
         </div>
-        <div class="topic-card">
-          <img
-            src="./public/assets/images/plan-3.png"
-            alt="Business counseling"
-            class="plan-image"
-          />
-          <a href="#" class="topic-title">Manage your business</a>
-          <p class="topic-description">
-            Run your business like a boss. Master day-to-day operations and
-            prepare for success.
-          </p>
-          <ul class="topic-links">
-            <li><a href="#">Manage your finances</a></li>
-            <li><a href="#">Hire and manage employees</a></li>
-            <li><a href="#">Pay taxes</a></li>
-            <li><a href="#">Stay legally compliant</a></li>
-            <li><a href="#">Buy assets and equipment</a></li>
-            <li><a href="#">Marketing and sales</a></li>
-            <li><a href="#">AI for small business</a></li>
-            <li><a href="#">Strengthen your cybersecurity</a></li>
-            <li><a href="#">Prepare for emergencies</a></li>
-            <li><a href="#">Recover from disasters</a></li>
-            <li><a href="#">Close or sell your business</a></li>
-            <li><a href="#">Hire employees with disabilities</a></li>
-          </ul>
-        </div>
-        <div class="topic-card">
-          <img
-            src="./public/assets/images/plan-4.png"
-            alt="Business counseling"
-            class="plan-image"
-          />
-          <a href="#" class="topic-title">Grow your business</a>
-          <p class="topic-description">
-            When business is good, it's time to expand. Find new funding,
-            locations and customers.
-          </p>
-          <ul class="topic-links">
-            <li><a href="#">Get more funding</a></li>
-            <li><a href="#">Expand to new locations</a></li>
-            <li><a href="#">Merge and acquire businesses</a></li>
-            <li><a href="#">Become a federal contractor</a></li>
-            <li><a href="#">Export products</a></li>
-            <li><a href="#">Women-owned businesses</a></li>
-            <li><a href="#">Native American-owned businesses</a></li>
-            <li><a href="#">Veteran-owned businesses</a></li>
-            <li><a href="#">Military spouse businesses</a></li>
-            <li><a href="#">LGBTQ-owned businesses</a></li>
-            <li><a href="#">Rural businesses</a></li>
-            <li><a href="#">Minority-owned businesses</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <section class="help-section">
-      <h2>How we help small businesses</h2>
-      <div class="help-grid">
-        <div class="help-card">
-          <img
-            src="./public/assets/images/help-1.png"
-            alt="Business counseling"
-            class="help-card-image"
-          />
-          <div class="help-card-content">
-            <h3>Free business counseling</h3>
-            <p>
-              Get business advice from our partnering organizations and experts.
-            </p>
-            <a href="#" class="help-card-button">Find counselors</a>
+        <div class="options">
+          <div class="promo-box">
+            <h3>As unique as you are</h3>
+            <p>Customize your Wells Fargo Debit Card today</p>
+          </div>
+          <div class="promo-box">
+            <h3>Bank your way</h3>
+            <p>Personalizing your account can help</p>
+          </div>
+          <div class="promo-box">
+            <h3>Get started</h3>
+            <p>Check out our Checking Account Quick Start guide</p>
           </div>
         </div>
 
-        <div class="help-card">
-          <img
-            src="./public/assets/images/help-2.png"
-            alt="Business loans"
-            class="help-card-image"
-          />
-          <div class="help-card-content">
-            <h3>SBA-guaranteed business loans</h3>
-            <p>Find an SBA lender near you to help fund your business.</p>
-            <a href="#" class="help-card-button">Use Lender Match</a>
+        <div class="disclosures">
+          * Account Disclosures
+          <p>Deposit products offered by Wells Fargo Bank, N.A. Member FDIC.</p>
+          <p>Equal Housing Lender</p>
+        </div>
+      </main>
+
+      <aside class="right-panel">
+        <div class="panel-section">
+          <h3 class="panel-header">Welcome, ANDREW</h3>
+          <p>Your last sign on was April 4, 2017</p>
+          <div class="panel-item">
+            <div class="message-wrapper">
+              <img
+                src="./public/assets/images/mail.jpg"
+                alt="Mail"
+                class="mail-icon"
+              />
+              <span>View or send messages</span>
+            </div>
+            <span class="arrow-icon">›</span>
+          </div>
+          <div class="panel-item">
+            <span>🔒 Sign Off</span>
           </div>
         </div>
 
-        <div class="help-card">
-          <img
-            src="./public/assets/images/help-3.png"
-            alt="Disaster loans"
-            class="help-card-image"
-          />
-          <div class="help-card-content">
-            <h3>Home & business disaster loans</h3>
-            <p>
-              Apply for a low-interest disaster loan to help recover from
-              declared disasters.
-            </p>
-            <a href="#" class="help-card-button">Apply for assistance</a>
+        <div class="video-section">
+          <div class="play-button">▶</div>
+          <h2 class="video-title">Watch and learn</h2>
+          <p class="video-description">
+            Explore videos with tips for managing your money
+          </p>
+          <div class="dot-navigation">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
           </div>
         </div>
 
-        <div class="help-card">
-          <img
-            src="./public/assets/images/help-4.png"
-            alt="Government contracting"
-            class="help-card-image"
-          />
-          <div class="help-card-content">
-            <h3>Federal government contracting</h3>
-            <p>
-              Learn how to find and win small business government contracts.
-            </p>
-            <a href="#" class="help-card-button">Find contracts</a>
+        <div class="panel-section">
+          <h3 class="panel-header">Planning & Tools</h3>
+          <div class="panel-item">
+            Calculate debt-to-income ratio
+            <span class="arrow-icon">›</span>
+          </div>
+          <div class="panel-item">
+            View My Retirement Plan®
+            <span class="arrow-icon">›</span>
+          </div>
+          <div class="panel-item">
+            View My Credit Options Guide®
+            <span class="arrow-icon">›</span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="grow-business-section">
-      <div class="grow-business-content">
-        <h2>Start and grow your business</h2>
-        <p>
-          Want to be an entrepreneur? Learn how to get started on your business
-          in 10 steps.
-        </p>
-        <a href="#" class="start-business-button">Start a business</a>
-      </div>
-    </section>
-    <div class="return-to-top">
-      <a href="#">Return to top</a>
+        <div class="panel-section">
+          <h3 class="panel-header">Service offers</h3>
+          <div class="panel-item">
+            Set up direct deposit
+            <span class="arrow-icon">›</span>
+          </div>
+          <div class="panel-item">
+            Create a savings plan to reach your goals
+            <span class="arrow-icon">›</span>
+          </div>
+          <div class="panel-item">
+            Streamlined refinancing
+            <span class="arrow-icon">›</span>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3 class="panel-header">Give Feedback</h3>
+          <div class="panel-item">
+            Help us improve your online banking experience
+            <span class="arrow-icon">›</span>
+          </div>
+        </div>
+      </aside>
     </div>
 
     <footer class="footer">
       <div class="footer-content">
-        <div class="footer-section">
-          <h3>About SBA</h3>
-          <ul class="footer-links">
-            <li><a href="#">Contact SBA</a></li>
-            <li><a href="#">Locations</a></li>
-            <li><a href="#">Upcoming events</a></li>
-            <li><a href="#">Newsroom</a></li>
-            <li><a href="#">SBA blog</a></li>
-            <li><a href="#">Leadership team</a></li>
-          </ul>
+        <div>
+          Wells Fargo Online® | Online Security Guarantee | Privacy, Cookies,
+          Security & Legal
         </div>
-
-        <div class="footer-section">
-          <h3>About the site</h3>
-          <ul class="footer-links">
-            <li><a href="#">Site map</a></li>
-            <li><a href="#">Privacy policy</a></li>
-            <li><a href="#">Linking policy</a></li>
-            <li><a href="#">Plain language</a></li>
-            <li><a href="#">Accessibility</a></li>
-            <li><a href="#">Disclaimers</a></li>
-          </ul>
-        </div>
-
-        <!-- Open government -->
-        <div class="footer-section">
-          <h3>Open government</h3>
-          <ul class="footer-links">
-            <li><a href="#">Freedom of Information Act</a></li>
-            <li><a href="#">No Fear Act</a></li>
-            <li><a href="#">Open data sources</a></li>
-            <li><a href="#">Policies and guidance</a></li>
-            <li><a href="#">Budget and performance</a></li>
-            <li><a href="#">Regulations.gov</a></li>
-          </ul>
-        </div>
-
-        <!-- Oversight -->
-        <div class="footer-section">
-          <h3>Oversight</h3>
-          <ul class="footer-links">
-            <li><a href="#">Inspector General</a></li>
-            <li><a href="#">Advocacy</a></li>
-            <li><a href="#">Hearings and appeals</a></li>
-            <li><a href="#">Ombudsman</a></li>
-            <li><a href="#">Fraud and identity theft</a></li>
-            <li><a href="#">WhiteHouse.gov</a></li>
-            <li><a href="#">USA.gov</a></li>
-          </ul>
-        </div>
-
-        <!-- Sign up -->
-        <div class="footer-section">
-          <h3>Sign up</h3>
-          <form class="signup-form">
-            <p>
-              Receive information about upcoming SBA events, news alerts, and
-              program updates.
-            </p>
-            <p style="margin-top: 8px" class="required">
-              * indicates a required field
-            </p>
-            <div class="form-field">
-              <label for="email">Email *</label>
-              <input type="email" id="email" required />
-            </div>
-            <div class="form-field">
-              <label for="zip">ZIP Code *</label>
-              <input type="text" id="zip" required />
-            </div>
-            <button type="submit" class="signup-button">
-              Subscribe to SBA emails
-            </button>
-            <p style="margin-top: 20px">
-              Your information will only be used in accordance with our
-              <a href="#">website privacy policy</a>.
-            </p>
-          </form>
-        </div>
+        <div>Contact Us | Locations</div>
       </div>
     </footer>
+    <script>
+      let activeMenu = null;
+      let activeCard = null;
 
-    <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <div class="footer-info">
-          <div class="footer-logo">
-            <img
-              class="sba-logo-2"
-              src="./public/assets/images/sba.png"
-              alt="sba logo"
-            />
-          </div>
-          <div style="font-size: larger">
-            <span style="font-weight: bold">
-              U.S. Small Business Administration
-            </span>
-            <p class="footer-address">
-              409 3rd St., SW<br />
-              Washington, DC 20416<br />
-              <a href="#" style="color: #2b2b2b">800-827-5722</a>
-            </p>
-          </div>
-        </div>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook"
-            ><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-              /></svg
-          ></a>
-          <a href="#" aria-label="Twitter"
-            ><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
-              /></svg
-          ></a>
-          <a href="#" aria-label="YouTube"
-            ><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
-              /></svg
-          ></a>
-          <a href="#" aria-label="LinkedIn"
-            ><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-              />
-              <path d="M2 9h4v12H2z" />
-              <circle cx="4" cy="4" r="2" /></svg
-          ></a>
-          <a href="#" aria-label="Instagram"
-            ><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg
-          ></a>
-        </div>
-      </div>
-    </div>
+      function toggleDropdown(event, menuId) {
+        event.stopPropagation();
+
+        const isMobile = window.innerWidth <= 536;
+        const menuSelector = isMobile ? `${menuId}-mobile` : menuId;
+        const menu = document.getElementById(menuSelector);
+        const card = event.target.closest(".account-details");
+
+        if (!menu) return;
+
+        if (activeMenu === menu) {
+          menu.classList.remove("active");
+          card.classList.remove("menu-active");
+          activeMenu = null;
+          activeCard = null;
+          return;
+        }
+
+        if (activeMenu) {
+          activeMenu.classList.remove("active");
+          activeCard?.classList.remove("menu-active");
+        }
+        menu.classList.add("active");
+        if (isMobile) {
+          card.classList.add("menu-active");
+        }
+
+        activeMenu = menu;
+        activeCard = card;
+      }
+
+      document.addEventListener("click", function (event) {
+        const clickedElement = event.target;
+        const isMenuDots = clickedElement.closest(".menu-dots");
+        const isMenu =
+          clickedElement.closest(".dropdown-menu") ||
+          clickedElement.closest(".mobile-menu");
+
+        if (!isMenuDots && !isMenu && activeMenu) {
+          activeMenu.classList.remove("active");
+          activeCard?.classList.remove("menu-active");
+          activeMenu = null;
+          activeCard = null;
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (activeMenu) {
+          activeMenu.classList.remove("active");
+          activeCard?.classList.remove("menu-active");
+          activeMenu = null;
+          activeCard = null;
+        }
+      });
+    </script>
   </body>
 </html>
