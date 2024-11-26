@@ -11,7 +11,7 @@ body {
       rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 1) 70%
     ),
-    url("./public/assets/images/background.jpg") no-repeat center top;
+    url("../images/background.jpg") no-repeat center top;
   background-size: cover;
   min-height: 100vh;
 }
@@ -32,17 +32,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 3vw; /* Remove padding */
+  padding-left: 3vw; 
   padding-right: 3vw;
 }
 
-/* Update logo styles */
 .logo {
   color: #ffb81c;
   font-weight: bold;
   font-size: 1.2rem;
 }
-.header-right {
+.right-dashboard {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -54,7 +53,7 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-.search-content {
+.search-field {
   width: var(--container-width);
   display: flex;
   justify-content: flex-end;
@@ -89,7 +88,7 @@ body {
   font-weight: normal;
 }
 
-.account-card {
+.account-details {
   border: 1px solid #ddd;
   padding: 15px;
   margin-bottom: 15px;
@@ -162,7 +161,7 @@ body {
   font-size: 0.9rem;
 }
 
-.promotional-boxes {
+.options {
   display: flex;
   gap: 20px;
   margin-top: 20px;
@@ -324,7 +323,7 @@ body {
 
 .dropdown-menu {
   position: absolute;
-  top: 100%; /* Position it right below the dots */
+  top: 100%;
   right: 0;
   background: white;
   border: 1px solid #ddd;
@@ -333,7 +332,7 @@ body {
   display: none;
   z-index: 1000;
   min-width: 200px;
-  margin-top: 5px; /* Add some spacing from the dots */
+  margin-top: 5px; 
 }
 
 .dropdown-menu.active {
@@ -375,7 +374,7 @@ body {
   align-items: center;
   width: 100%;
 }
-.mobile-actions {
+.mobile-footer {
   display: none;
 }
 
@@ -405,7 +404,7 @@ body {
     width: 100%;
   }
 
-  .account-card.menu-active .balance-text {
+  .account-details.menu-active .balance-text {
     align-items: center;
   }
 
@@ -461,8 +460,8 @@ body {
     transform: translateX(-50%);
   }
 
-  .header-right {
-    display: none; /* Hide the top nav items */
+  .right-dashboard {
+    display: none; 
   }
 
   .logo {
@@ -471,14 +470,14 @@ body {
   }
 
   .search-bar {
-    display: none; /* Hide search on mobile */
+    display: none; 
   }
 
   .main-container {
     width: 100%;
     max-width: 100%;
     box-shadow: none;
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column; 
   }
 
   .main-content {
@@ -491,8 +490,7 @@ body {
     margin: 10px 0;
   }
 
-  /* Simplify account cards */
-  .account-card {
+  .account-details {
     border: none;
     border-bottom: 1px solid #eee;
     padding: 15px 10px;
@@ -500,7 +498,7 @@ body {
   }
 
   .account-icon {
-    display: none; /* Hide account icons */
+    display: none;
   }
 
   .account-name {
@@ -520,13 +518,12 @@ body {
     font-size: 0.7rem;
   }
 
-  /* Hide promotional boxes */
-  .promotional-boxes {
+  .options {
     display: none;
   }
 
-  .mobile-actions {
-    display: block; /* or you can keep the existing styles */
+  .mobile-footer {
+    display: block; 
     background: #537f24;
     color: white;
     padding: 20px;
@@ -534,17 +531,17 @@ body {
     margin-top: 20px;
   }
 
-  .mobile-actions h2 {
+  .mobile-footer h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
 
-  .mobile-actions p {
+  .mobile-footer p {
     font-size: 0.9rem;
     margin-bottom: 20px;
   }
 
-  .mobile-actions .rate-icon {
+  .mobile-footer .rate-icon {
     font-size: 2rem;
     margin-bottom: 15px;
   }
@@ -559,7 +556,6 @@ body {
     margin-top: 10px;
   }
 
-  /* Mobile slider dots */
   .slider-dots {
     display: flex;
     justify-content: center;
@@ -578,21 +574,10 @@ body {
     background: white;
   }
 
-  /* Simplified footer for mobile */
   .disclosures {
     font-size: 0.8rem;
     padding: 15px;
     margin-top: 0;
-  }
-
-  /* Add navigation arrows */
-  .mobile-nav-arrows {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
   }
 
   .nav-arrow {
@@ -600,15 +585,15 @@ body {
     font-size: 1.5rem;
   }
   .dropdown-menu {
-    display: none !important; /* Hide desktop dropdown on mobile */
+    display: none !important; 
   }
 
   .mobile-menu {
     position: relative;
-    display: none; /* Hidden by default */
+    display: none; 
     flex-direction: row;
-    justify-content: space-around; /* Changed from space-between */
-    background-color: #0067b1; /* Wells Fargo blue */
+    justify-content: space-around; 
+    background-color: #0067b1;
     padding: 15px;
     margin-top: 15px;
     width: 100%;
@@ -654,7 +639,6 @@ body {
   }
 }
 
-/* Add this new media query for smaller screens */
 @media screen and (min-width: 537px) and (max-width: 1200px) {
   .header-content {
     width: 100vw;
@@ -663,7 +647,7 @@ body {
   .logo {
     font-size: 1rem;
   }
-  .mobile-actions {
+  .mobile-footer {
     display: none;
   }
 
@@ -679,7 +663,7 @@ body {
     border-bottom: 1px solid #ddd;
   }
 
-  .search-content {
+  .search-field {
     max-width: 1200px;
     margin: 0 auto;
     padding-right: 5.5vw;
@@ -691,7 +675,7 @@ body {
     width: 25vw;
   }
 
-  .account-card {
+  .account-details {
     padding: 0.75rem;
   }
 
@@ -717,7 +701,7 @@ body {
     font-size: 0.7rem;
   }
 
-  .promotional-boxes {
+  .options {
     gap: 0.5rem;
   }
 
